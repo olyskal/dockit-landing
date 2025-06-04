@@ -41,7 +41,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <DownloadButton 
-                  downloadUrl="/downloads/dockit-latest.dmg"
+                  downloadUrl="/downloads/dockit-latest.zip"
                   version="2.0.2"
                 />
                 <a 
@@ -247,12 +247,12 @@ export default function Home() {
                 "Standard support"
               ]}
               ctaText="Download Free"
-              ctaLink="/downloads/dockit-latest.dmg"
+              ctaLink="/downloads/dockit-latest.zip"
               delay={0}
             />
             <PricingCard
               title="Premium"
-              price="$4.99"
+              price="$3.99"
               description="Time to DockIt! 🚀"
               features={[
                 "Unlimited dock profiles",
@@ -262,7 +262,7 @@ export default function Home() {
               ]}
               isPopular={true}
               ctaText="Download App"
-              ctaLink="/downloads/dockit-latest.dmg"
+              ctaLink="/downloads/dockit-latest.zip"
               delay={0.2}
             />
           </div>
@@ -285,7 +285,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <DownloadButton 
-                downloadUrl="/downloads/dockit-latest.dmg"
+                downloadUrl="/downloads/dockit-latest.zip"
                 version="2.0.2"
                 className="sm:w-64"
               />
