@@ -5,7 +5,6 @@ import Footer from '@/components/Footer';
 import Link from 'next/link';
 
 export default function PrivacyPolicy() {
-  const currentYear = new Date().getFullYear(); // This will still correctly get the current year
 
   return (
     <div className="bg-gradient-to-b from-dockit-dark-950 to-dockit-dark-900 min-h-screen text-white">
