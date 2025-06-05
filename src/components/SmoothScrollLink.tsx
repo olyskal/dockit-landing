@@ -8,6 +8,7 @@ interface SmoothScrollLinkProps {
   className?: string;
   duration?: number;
   offset?: number;
+  onClick?: () => void;
 }
 
 const SmoothScrollLink = ({ 

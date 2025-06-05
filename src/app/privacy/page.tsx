@@ -41,9 +41,9 @@ export default function PrivacyPolicy() {
                 <section>
                   <h2 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white">1. Introduction</h2>
                   <p className="text-dockit-dark-200 text-sm md:text-base">
-                    Welcome to DockIt, an application developed and maintained by the DockIt team ("we", "us", or "our").
+                    Welcome to DockIt, an application developed and maintained by the DockIt team (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;).
                     This Privacy Policy has been created to help you understand how we collect, use, and protect
-                    your personal information when you use our DockIt application ("the Application").
+                    your personal information when you use our DockIt application (&quot;the Application&quot;).
                   </p>
                   <p className="text-dockit-dark-200 text-sm md:text-base mt-3">
                     We are committed to protecting your privacy and ensuring the security of your personal information.
@@ -135,7 +135,7 @@ export default function PrivacyPolicy() {
                     <li>Object to our processing of your personal information</li>
                   </ul>
                   <p className="text-dockit-dark-200 text-sm md:text-base mt-3">
-                    To exercise these rights, please contact us using the information provided in the "Contact Us" section below.
+                    To exercise these rights, please contact us using the information provided in the &quot;Contact Us&quot; section below.
                   </p>
                 </section>
 
@@ -144,7 +144,7 @@ export default function PrivacyPolicy() {
                   <p className="text-dockit-dark-200 text-sm md:text-base">
                     We may update this Privacy Policy from time to time to reflect changes in our practices or for
                     other operational, legal, or regulatory reasons. We will notify you of any material changes by
-                    posting the new Privacy Policy on this page and updating the "Last updated" date at the top
+                    posting the new Privacy Policy on this page and updating the &quot;Last updated&quot; date at the top
                     of this Privacy Policy.
                   </p>
                 </section>
