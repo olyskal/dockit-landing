@@ -43,6 +43,7 @@ export default function Home() {
                 <DownloadButton 
                   downloadUrl="/downloads/dockit-latest.zip"
                   version="2.0.2"
+                  productType="hero_section"
                 />
                 <a 
                   href="#features" 
@@ -288,6 +289,7 @@ export default function Home() {
                 downloadUrl="/downloads/dockit-latest.zip"
                 version="2.0.2"
                 className="sm:w-64"
+                productType="download_section"
               />
             </div>
           </motion.div>

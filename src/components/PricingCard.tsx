@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { trackDownload } from './Analytics';
 
 interface PricingCardProps {
   title: string;
@@ -68,6 +69,7 @@ const PricingCard = ({
         </ul>
         <a
           href={ctaLink}
+          onClick={() => trackDownload(title.toLowerCase())}
           className={`w-full py-3 rounded-lg text-center font-medium transition-all ${
             isPopular
               ? 'bg-gradient-to-r from-dockit-purple-500 to-dockit-purple-700 text-white hover:shadow-lg hover:shadow-dockit-purple-500/20'

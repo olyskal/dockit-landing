@@ -1,20 +1,24 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { trackDownload } from './Analytics';
 
 interface DownloadButtonProps {
   className?: string;
   version?: string;
   downloadUrl: string;
+  productType?: string;
 }
 
 const DownloadButton = ({ 
   className = '', 
-  downloadUrl 
+  downloadUrl,
+  productType = 'standard'
 }: DownloadButtonProps) => {
   return (
     <motion.a
       href={downloadUrl}
+      onClick={() => trackDownload(productType)}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={`bg-gradient-to-r from-dockit-purple-600 to-dockit-purple-800 text-white px-8 py-3 rounded-full text-center font-medium hover:shadow-lg hover:shadow-dockit-purple-500/20 transition-all flex items-center justify-center gap-2 ${className}`}
