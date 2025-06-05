@@ -10,10 +10,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DockIt - Organize Your Mac Dock Like Never Before",
-  description: "Create custom dock profiles for different workflows and boost your productivity. DockIt helps you organize your Mac experience with seamless profile switching.",
+  title: "DockIt - your dock, your way",
+  description: "Create custom dock profiles for different workflows and boost your productivity. DockIt helps you organize your Mac experience with seamless profile switching and smart automatic Dock sorting based on your usage.",
   keywords: ["dockit", "mac", "macos", "dock", "productivity", "app", "profiles", "organization", "workflow"],
-  authors: [{ name: "DockIt Team" }],
+  authors: [{ name: "Afonso Oliveira" }],
   creator: "DockIt",
 };
 
