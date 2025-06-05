@@ -248,7 +248,7 @@ export default function Home() {
                 "Standard support"
               ]}
               ctaText="Download Free"
-              ctaLink="/downloads/dockit-latest.zip"
+              ctaLink="/downloads/DockIt-2.0.3.zip"
               delay={0}
             />
             <PricingCard
@@ -263,7 +263,7 @@ export default function Home() {
               ]}
               isPopular={true}
               ctaText="Download App"
-              ctaLink="/downloads/dockit-latest.zip"
+              ctaLink="/downloads/DockIt-2.0.3.zip"
               delay={0.2}
             />
           </div>
@@ -286,7 +286,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <DownloadButton 
-                downloadUrl="/downloads/dockit-latest.zip"
+                downloadUrl="/downloads/DockIt-2.0.3.zip"
                 version="2.0.2"
                 className="sm:w-64"
                 productType="download_section"
