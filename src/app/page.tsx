@@ -41,7 +41,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <DownloadButton 
-                  downloadUrl="/downloads/DockIt-2.0.3.zip"
+                  downloadUrl="/downloads/dockit-latest.zip"
                   version="2.0.2"
                   productType="hero_section"
                 />
@@ -248,7 +248,7 @@ export default function Home() {
                 "Standard support"
               ]}
               ctaText="Download Free"
-              ctaLink="/downloads/DockIt-2.0.3.zip"
+              ctaLink="/downloads/dockit-latest.zip"
               delay={0}
             />
             <PricingCard
@@ -263,7 +263,7 @@ export default function Home() {
               ]}
               isPopular={true}
               ctaText="Download App"
-              ctaLink="/downloads/DockIt-2.0.3.zip"
+              ctaLink="/downloads/dockit-latest.zip"
               delay={0.2}
             />
           </div>
@@ -286,7 +286,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <DownloadButton 
-                downloadUrl="/downloads/DockIt-2.0.3.zip"
+                downloadUrl="/downloads/dockit-latest.zip"
                 version="2.0.2"
                 className="sm:w-64"
                 productType="download_section"

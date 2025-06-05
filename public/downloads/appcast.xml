@@ -17,12 +17,12 @@
             </description>
             <pubDate>Thu, 05 Jun 2025 11:00:00 -0300</pubDate>
             <enclosure
-                url="https://dockit.spaces/downloads/DockIt-2.0.3.zip"
+                url="https://dockit.spaces/downloads/dockit-latest.zip"
                 sparkle:version="2.0.3"
                 sparkle:shortVersionString="2.0.3"
-                length="1366314"
+                length="2317360"
                 type="application/octet-stream"
-                sparkle:edSignature="mjv9VFrr1J0mp991ohUPWXUBGlk2OERL/Zt7EMJWH3RaRKykEPPV0umFos3yVtFE4z7CWFPUr+XT2ZLDMtalCw==" />
+                sparkle:edSignature="cU/8b6kymgGZkpeb4CaIxl11CAc9YScJ+wZSccDpTxu1jHF2kyQNTcf7HdNZL7ilzSe2ewg3VhhehuRDWJmwDA==" />
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
