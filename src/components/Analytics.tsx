@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 // Substitua pelo seu ID de medição do GA4
 const GA_MEASUREMENT_ID = 'G-J6Y96KYTGY';
 
-export default function Analytics() {
+function AnalyticsContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -19,6 +19,11 @@ export default function Analytics() {
       });
     }
   }, [pathname, searchParams]);
+
+  return null;
+}
+
+export default function Analytics() {
 
   return (
     <>
@@ -40,6 +45,9 @@ export default function Analytics() {
           `,
         }}
       />
+      <Suspense fallback={null}>
+        <AnalyticsContent />
+      </Suspense>
     </>
   );
 }

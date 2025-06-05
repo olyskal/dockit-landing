@@ -3,8 +3,8 @@ interface Window {
     command: 'event' | 'config' | 'consent' | 'get' | 'set',
     targetId: string,
     params?: {
-      [key: string]: any;
+      [key: string]: unknown;
     }
   ) => void;
-  dataLayer: any[];
+  dataLayer: unknown[];
 }
