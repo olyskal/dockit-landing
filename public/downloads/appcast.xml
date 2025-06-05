@@ -20,9 +20,9 @@
                 url="https://dockit.spaces/downloads/dockit-latest.zip"
                 sparkle:version="2.0.3"
                 sparkle:shortVersionString="2.0.3"
-                length="2317360"
+                length="2321589"
                 type="application/octet-stream"
-                sparkle:edSignature="cU/8b6kymgGZkpeb4CaIxl11CAc9YScJ+wZSccDpTxu1jHF2kyQNTcf7HdNZL7ilzSe2ewg3VhhehuRDWJmwDA==" />
+                sparkle:edSignature="KzqeSuyottMfyTgFetQsmuJprznc/GhQalujYYQqVf1n1cP89E2OFo3lRttB1x3dHzCEAu7jFSMGOVg2Zs3dBw==" />
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
