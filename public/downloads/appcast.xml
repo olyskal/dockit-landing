@@ -18,7 +18,7 @@
             <pubDate>Thu, 05 Jun 2025 11:00:00 -0300</pubDate>
             <enclosure
                 url="https://dockit.spaces/downloads/dockit-latest.zip"
-                sparkle:version="2.0.3"
+                sparkle:version="203"
                 sparkle:shortVersionString="2.0.3"
                 length="2321589"
                 type="application/octet-stream"
