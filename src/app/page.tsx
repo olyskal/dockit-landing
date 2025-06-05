@@ -41,7 +41,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <DownloadButton 
-                  downloadUrl="/downloads/dockit-latest.zip"
+                  downloadUrl="/downloads/DockIt-2.0.3.zip"
                   version="2.0.2"
                   productType="hero_section"
                 />
