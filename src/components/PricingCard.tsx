@@ -45,7 +45,7 @@ const PricingCard = ({
         <h3 className="text-xl font-bold text-white">{title}</h3>
         <div className="mt-2 mb-4">
           <span className="text-3xl font-bold text-white">{price}</span>
-          {String(price) !== 'Free' && <span className="text-dockit-dark-400 ml-1">/month</span>}
+          {String(price) !== 'Free' && <span className="text-dockit-dark-400 ml-1">one time</span>}
         </div>
         <p className="text-dockit-dark-300 mb-6">{description}</p>
         <ul className="space-y-3 mb-8 flex-grow">

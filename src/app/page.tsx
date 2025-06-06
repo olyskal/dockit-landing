@@ -244,7 +244,7 @@ export default function Home() {
               description="For curious people 👀"
               features={[
                 "Test for 7 days",
-                "Up to 1 dock profile",
+                "Unlimited dock profiles until you bug it :D",
                 "Standard support"
               ]}
               ctaText="Download Free"
@@ -252,8 +252,8 @@ export default function Home() {
               delay={0}
             />
             <PricingCard
-              title="Premium"
-              price="$3.99"
+              title="Unlimited"
+              price="$9.99"
               description="Time to DockIt! 🚀"
               features={[
                 "Unlimited dock profiles",
