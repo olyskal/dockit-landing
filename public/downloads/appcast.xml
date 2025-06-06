@@ -5,24 +5,26 @@
         <description>Latest updates for DockIt</description>
         <language>en</language>
         <item>
-            <title>Version 2.0.3</title>
+            <title>Version 2.0.4</title>
             <description><![CDATA[
-                <h2>What’s new in version 2.0.3:</h2>
+                <h2>What’s new in version 2.0.4:</h2>
                 <ul>
-                    <li>Added automatic update system</li>
-                    <li>Minor bug fixes</li>
-                    <li>Performance improvements</li>
+                    <li>Removed subscription system</li>
+                    <li>Free trial users are now able to create multiple profiles</li>
+                    <li>Added a Sign in screen and fixed some bugs related to it</li>
+                    <li>Trial users are now able to see a free trial badge correctly</li>
+                    <li>Free badge is not shown anymore due to plan confusing issues</li>
                 </ul>
             ]]>
             </description>
             <pubDate>Thu, 05 Jun 2025 11:00:00 -0300</pubDate>
             <enclosure
                 url="https://dockit.space/downloads/dockit-latest.zip"
-                sparkle:version="203"
-                sparkle:shortVersionString="2.0.3"
-                length="2321589"
+                sparkle:version="204"
+                sparkle:shortVersionString="2.0.4"
+                length="2326045"
                 type="application/octet-stream"
-                sparkle:edSignature="KzqeSuyottMfyTgFetQsmuJprznc/GhQalujYYQqVf1n1cP89E2OFo3lRttB1x3dHzCEAu7jFSMGOVg2Zs3dBw==" />
+                sparkle:edSignature="RIRz9M1sWUXxndaB/S6ndfFmhVQ+k5iWaKNwpUxSRn1cJ2tUBw1ZafcTCj8ddZZZJhIP9845Zmco4xapZFcGBQ==" />
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
