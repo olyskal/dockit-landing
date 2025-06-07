@@ -11,7 +11,7 @@
                 <ul>
                     <li>Improved performance when creating profiles</li>
                     <li>Added loading state when creating profiles</li>
-                    <li><Now you can add folders or remove them within Profile creator/editor</li>
+                    <li>Now you can add folders or remove them within Profile creator/editor</li>
                     <li>Removed unnecessary API calls</li>
                     <li>Minor bug fixes</li>
                 </ul>
