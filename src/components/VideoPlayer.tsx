@@ -3,6 +3,26 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Extend HTMLVideoElement to include webkit methods for iOS compatibility
+declare global {
+  interface HTMLVideoElement {
+    webkitEnterFullscreen?: () => void;
+    webkitExitFullscreen?: () => void;
+    webkitRequestFullscreen?: () => void;
+    mozRequestFullScreen?: () => void;
+    msRequestFullscreen?: () => void;
+  }
+  
+  interface Document {
+    webkitFullscreenElement?: Element;
+    mozFullScreenElement?: Element;
+    msFullscreenElement?: Element;
+    webkitExitFullscreen?: () => void;
+    mozCancelFullScreen?: () => void;
+    msExitFullscreen?: () => void;
+  }
+}
+
 interface VideoPlayerProps {
   src: string;
   className?: string;
@@ -56,21 +76,37 @@ const VideoPlayer = ({
     };
 
     const handleFullScreenChange = () => {
-      setIsFullScreen(document.fullscreenElement === videoElement);
+      const isCurrentlyFullscreen = !!(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      );
+      setIsFullScreen(isCurrentlyFullscreen);
     };
 
     videoElement.addEventListener('canplay', handleCanPlay);
     videoElement.addEventListener('timeupdate', handleTimeUpdate);
     videoElement.addEventListener('volumechange', handleVolumeChange);
     videoElement.addEventListener('ratechange', handleRateChange);
+    
+    // Listen to all vendor-prefixed fullscreen change events
     document.addEventListener('fullscreenchange', handleFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullScreenChange);
+    document.addEventListener('msfullscreenchange', handleFullScreenChange);
     
     return () => {
       videoElement.removeEventListener('canplay', handleCanPlay);
       videoElement.removeEventListener('timeupdate', handleTimeUpdate);
       videoElement.removeEventListener('volumechange', handleVolumeChange);
       videoElement.removeEventListener('ratechange', handleRateChange);
+      
+      // Remove all vendor-prefixed fullscreen change events
       document.removeEventListener('fullscreenchange', handleFullScreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
+      document.removeEventListener('mozfullscreenchange', handleFullScreenChange);
+      document.removeEventListener('msfullscreenchange', handleFullScreenChange);
     };
   }, []);
 
@@ -139,13 +175,55 @@ const VideoPlayer = ({
   const toggleFullScreen = () => {
     if (!videoRef.current) return;
     
-    if (!isFullScreen) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
+    const video = videoRef.current;
+    
+    // Check if we're already in fullscreen
+    const isCurrentlyFullscreen = !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+    
+    if (!isCurrentlyFullscreen) {
+      // Enter fullscreen
+      
+      // For iOS Safari and mobile devices, use native video fullscreen
+      if (video.webkitEnterFullscreen && /iPhone|iPad|iPod|Mobile Safari/.test(navigator.userAgent)) {
+        try {
+          video.webkitEnterFullscreen();
+          return;
+        } catch {
+          console.log('webkitEnterFullscreen failed, trying standard methods');
+        }
+      }
+      
+      // Try standard and vendor-prefixed fullscreen methods
+      if (video.requestFullscreen) {
+        video.requestFullscreen().catch(console.error);
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      } else {
+        // Fallback: Try to make the video container fullscreen
+        const container = video.parentElement;
+        if (container && container.requestFullscreen) {
+          container.requestFullscreen().catch(console.error);
+        }
       }
     } else {
+      // Exit fullscreen
       if (document.exitFullscreen) {
-        document.exitFullscreen();
+        document.exitFullscreen().catch(console.error);
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
       }
     }
   };
@@ -180,6 +258,11 @@ const VideoPlayer = ({
         transition={{ duration: 0.5 }}
         onMouseEnter={() => setShowControlsOverlay(true)}
         onMouseLeave={() => setShowControlsOverlay(false)}
+        onTouchStart={() => setShowControlsOverlay(true)}
+        onTouchEnd={() => {
+          // Keep controls visible for a bit longer on mobile
+          setTimeout(() => setShowControlsOverlay(false), 3000);
+        }}
       >
         <video
           ref={videoRef}
@@ -224,7 +307,7 @@ const VideoPlayer = ({
         <AnimatePresence>
           {showControls && showControlsOverlay && (
             <motion.div 
-              className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 pt-8 z-30"
+              className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 md:p-3 pt-8 z-30"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
@@ -239,7 +322,7 @@ const VideoPlayer = ({
                   max={duration || 100} 
                   value={currentTime} 
                   onChange={handleSeek} 
-                  className="w-full h-1 bg-dockit-dark-600 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-dockit-purple-400"
+                  className="w-full h-2 md:h-1 bg-dockit-dark-600 rounded-full appearance-none cursor-pointer touch-manipulation [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 md:[&::-webkit-slider-thumb]:h-3 md:[&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-dockit-purple-400"
                 />
                 <span className="text-white text-xs">{formatTime(duration)}</span>
               </div>
@@ -250,14 +333,15 @@ const VideoPlayer = ({
                   {/* Play/Pause button */}
                   <button 
                     onClick={togglePlayPause}
-                    className="text-white hover:text-dockit-purple-400 transition-colors"
+                    className="text-white hover:text-dockit-purple-400 transition-colors p-2 md:p-1 -m-2 md:-m-1 touch-manipulation"
+                    aria-label={isPlaying ? "Pause video" : "Play video"}
                   >
                     {isPlaying ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -268,15 +352,16 @@ const VideoPlayer = ({
                   <div className="flex items-center gap-2">
                     <button 
                       onClick={toggleMute}
-                      className="text-white hover:text-dockit-purple-400 transition-colors"
+                      className="text-white hover:text-dockit-purple-400 transition-colors p-2 md:p-1 -m-2 md:-m-1 touch-manipulation"
+                      aria-label={isMuted ? "Unmute video" : "Mute video"}
                     >
                       {isMuted ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clipRule="evenodd" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
                         </svg>
                       ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                         </svg>
                       )}
@@ -288,7 +373,7 @@ const VideoPlayer = ({
                       step="0.01" 
                       value={isMuted ? 0 : volume} 
                       onChange={handleVolumeChange} 
-                      className="w-16 h-1 bg-dockit-dark-600 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-2 [&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-dockit-purple-400"
+                      className="w-16 h-2 md:h-1 bg-dockit-dark-600 rounded-full appearance-none cursor-pointer touch-manipulation [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 md:[&::-webkit-slider-thumb]:h-2 md:[&::-webkit-slider-thumb]:w-2 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-dockit-purple-400"
                     />
                   </div>
                 </div>
@@ -326,14 +411,15 @@ const VideoPlayer = ({
                   {/* Fullscreen toggle */}
                   <button 
                     onClick={toggleFullScreen}
-                    className="text-white hover:text-dockit-purple-400 transition-colors"
+                    className="text-white hover:text-dockit-purple-400 transition-colors p-2 md:p-1 -m-2 md:-m-1 touch-manipulation"
+                    aria-label={isFullScreen ? "Exit fullscreen" : "Enter fullscreen"}
                   >
                     {isFullScreen ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
                       </svg>
                     )}

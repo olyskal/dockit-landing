@@ -15,6 +15,18 @@ export const metadata: Metadata = {
   keywords: ["dockit", "mac", "macos", "dock", "productivity", "app", "profiles", "organization", "workflow"],
   authors: [{ name: "Afonso Oliveira" }],
   creator: "DockIt",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -24,12 +36,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-      </head>
       <body className={`${inter.variable} antialiased bg-dockit-dark-950 text-white`}>
         <Analytics />
         {children}
