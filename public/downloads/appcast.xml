@@ -5,21 +5,12 @@
         <description>Latest updates for DockIt</description>
         <language>en</language>
         <item>
-            <title>Version 2.0.6</title>
+            <title>Version 2.0.7</title>
             <description><![CDATA[
                 <h2>What’s new in version 2.0.6:</h2>
                 <ul>
-                    <li>Improved performance when creating profiles</li>
-                    <li>Added loading state when creating profiles</li>
-                    <li>Now you can add folders or remove them within Profile creator/editor</li>
-                    <li>Removed unnecessary API calls</li>
-                    <li>Minor bug fixes</li>
+                    <li>now dockit can find apps recursively in folders within Applications folder</li>
                 </ul>
-
-                <h2>Important</h2>
-                <p>
-                    Folders within the Dock are not supported in <b>Automatic Order Mode</b> only in <b>Manual Dock</b>.
-                </p>
                 <h2>Known Issues</h2>
                 <p>
                     <b>Analytics</b> - we are working hard to make a good looking and functional analytics page.
@@ -29,11 +20,11 @@
             <pubDate>Thu, 05 Jun 2025 11:00:00 -0300</pubDate>
             <enclosure
                 url="https://dockit.space/downloads/dockit-latest.zip"
-                sparkle:version="206"
-                sparkle:shortVersionString="2.0.6"
-                length="2412124"
+                sparkle:version="207"
+                sparkle:shortVersionString="2.0.7"
+                length="2413559"
                 type="application/octet-stream"
-                sparkle:edSignature="swSm4l9hBKMO6aqPcaZ0AHp7TkbHavr337oJIcJoBz8tZNaxuDuv0dojwcwvIKbmSzhr7fHwgZARpY7GAUsmDA==" />
+                sparkle:edSignature="ET+KQirUsLHXFTFeUELuDIXORzciQ6x3zqWdZPawVj67ecbD2N/eJ9Hyv9DjEPOWio78On03/f6CxZb6OkyLAQ==" />
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
