@@ -5,18 +5,13 @@
         <description>Latest updates for DockIt</description>
         <language>en</language>
         <item>
-            <title>Version 2.0.8</title>
+            <title>Version 2.0.9</title>
             <description><![CDATA[
-                <h2>What’s new in version 2.0.8:</h2>
+                <h2>What’s new in version 2.0.9:</h2>
                 <ul>
-                    <li>Performance improvements</li>
-                    <li>Minor bug fixes</li>
-                </ul>
-
-                <h2>Future releases</h2>
-                <ul>
-                    <li>Support for minor macOS versions</li>
-                    <li>Shortcuts</li>
+                    <li>Shortcuts added</li>
+                    <li>some minor fixes</li>
+                    <li>performance improvements
                 </ul>
                 <h2>Known Issues</h2>
                 <p>
@@ -27,11 +22,11 @@
             <pubDate>Thu, 05 Jun 2025 11:00:00 -0300</pubDate>
             <enclosure
                 url="https://dockit.space/downloads/dockit-latest.zip"
-                sparkle:version="208"
-                sparkle:shortVersionString="2.0.8"
-                length="2435130"
+                sparkle:version="209"
+                sparkle:shortVersionString="2.0.9"
+                length="2670577"
                 type="application/octet-stream"
-                sparkle:edSignature="RH223ujCx6Cknmf9J6SOEOLEd2T/VF9BBrgBwQIdyzbM1JNmTNmTR44wq/6SjV/8omxfnHM2ryWK75BWUAlVDA==" />
+                sparkle:edSignature="dp7VWppTxI0wkxhgb8qq1aQvPql06+LvfeFG5oyzfChooSaGxad+JrSHCru56IJxJKMxOrEJGSfTz84uyTevCg==" />
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
         </item>
     </channel>
